@@ -7,6 +7,7 @@ package wulee;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -14,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -50,20 +52,29 @@ public class MainGui extends javax.swing.JFrame {
         outPathLb = new javax.swing.JLabel();
         hideBt = new javax.swing.JButton();
         unhidePane = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        inUnhideBrowserBt = new javax.swing.JButton();
+        inUnhidePathLb = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        textLengtTf = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        outputTA = new javax.swing.JTextArea();
+        unhideBt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WuLee");
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setText("Nhập văn bản muốn giấu:");
+        jLabel1.setText("Nhập văn bản muốn giấu");
 
         inputTextTA.setColumns(20);
         inputTextTA.setRows(5);
         jScrollPane1.setViewportView(inputTextTA);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel2.setText("Chọn ảnh phủ: ");
+        jLabel2.setText("Chọn ảnh phủ");
 
         inBrowseBt.setText("Duyệt tập tin");
         inBrowseBt.addActionListener(new java.awt.event.ActionListener() {
@@ -139,15 +150,81 @@ public class MainGui extends javax.swing.JFrame {
 
         tabPane.addTab("Giấu tin", hidePane);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setText("Chọn ảnh đã giấu tin");
+
+        inUnhideBrowserBt.setText("Duyệt tập tin");
+        inUnhideBrowserBt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inUnhideBrowserBtActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel6.setText("Độ dài UTF8 của mẩu tin:");
+
+        textLengtTf.setColumns(5);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setText("Văn bản");
+
+        outputTA.setEditable(false);
+        outputTA.setColumns(20);
+        outputTA.setRows(5);
+        jScrollPane2.setViewportView(outputTA);
+
+        unhideBt.setText("Trích tin");
+        unhideBt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                unhideBtActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout unhidePaneLayout = new javax.swing.GroupLayout(unhidePane);
         unhidePane.setLayout(unhidePaneLayout);
         unhidePaneLayout.setHorizontalGroup(
             unhidePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 395, Short.MAX_VALUE)
+            .addGroup(unhidePaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(unhidePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(unhidePaneLayout.createSequentialGroup()
+                        .addGroup(unhidePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(inUnhideBrowserBt)
+                            .addComponent(inUnhidePathLb)
+                            .addComponent(jLabel7)
+                            .addGroup(unhidePaneLayout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(textLengtTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(unhidePaneLayout.createSequentialGroup()
+                .addGap(161, 161, 161)
+                .addComponent(unhideBt)
+                .addContainerGap(163, Short.MAX_VALUE))
         );
         unhidePaneLayout.setVerticalGroup(
             unhidePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 289, Short.MAX_VALUE)
+            .addGroup(unhidePaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(inUnhideBrowserBt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(inUnhidePathLb)
+                .addGap(29, 29, 29)
+                .addGroup(unhidePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(textLengtTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(unhideBt)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         tabPane.addTab("Trích xuất tin", unhidePane);
@@ -168,23 +245,11 @@ public class MainGui extends javax.swing.JFrame {
 
     private void inBrowseBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inBrowseBtActionPerformed
         // TODO add your handling code here:
-        JFileChooser chooser = new JFileChooser();
-//        chooser.setFileFilter(new FileFilter() {
-//
-//            @Override
-//            public boolean accept(File f) {
-//                if (f.getName().endsWith(".jpg") || f.getName().endsWith(".png"))
-//                    return true;
-//                return false;
-//            }
-//
-//            @Override
-//            public String getDescription() {
-//                return null;
-//            }
-//        });
+        JFileChooser chooser = new JFileChooser();        
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("PNG Image", "png");
+        chooser.setFileFilter(filter);
         int returnVal = chooser.showOpenDialog(null);
-        if (returnVal == JFileChooser.APPROVE_OPTION){
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
             input = chooser.getSelectedFile();
             inPathLb.setText(input.getAbsolutePath());
         }
@@ -193,8 +258,10 @@ public class MainGui extends javax.swing.JFrame {
     private void outBrowseBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outBrowseBtActionPerformed
         // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("PNG Image", "png");
+        chooser.setFileFilter(filter);
         int returnVal = chooser.showSaveDialog(null);
-        if (returnVal == JFileChooser.APPROVE_OPTION){
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
             output = chooser.getSelectedFile();
             outPathLb.setText(output.getAbsolutePath());
         }
@@ -202,25 +269,66 @@ public class MainGui extends javax.swing.JFrame {
 
     private void hideBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hideBtActionPerformed
         // TODO add your handling code here:
-        if ((input==null) || (output==null) || (inputTextTA.getText().length()==0)){
+        String s;
+        if ((input == null) || (output == null) || (inputTextTA.getText().trim().length() == 0)) {
             JOptionPane.showMessageDialog(null, "Hãy nhập đủ thông tin đầu vào");
-        }else{
-            String s = inputTextTA.getText();
-             Matrix key = new Matrix(new int[][]{
-                 {1, 0, 0, 1},
-                 {1, 1, 0, 1},
-                 {0, 0, 0, 1},
-                 {0, 0, 1, 1},
-            });
+        } else {
+            s = inputTextTA.getText();
+            Matrix key = new Matrix(new int[][]{
+                {1, 0, 0, 1},
+                {1, 1, 0, 1},
+                {0, 0, 0, 1},
+                {0, 0, 1, 1},});
             try {
                 Utils.copyFile(input, output);
-                WuLee.hideInformation(s, key, input);
+                WuLee.hideInformation(s, key, output);
             } catch (IOException ex) {
                 Logger.getLogger(MainGui.class.getName()).log(Level.SEVERE, null, ex);
             }
-            JOptionPane.showMessageDialog(null, "Giấu tin thành công");
+            try {
+                JOptionPane.showMessageDialog(null, "Giấu tin thành công\nĐộ dài mẩu tin : "+Integer.toString(s.trim().getBytes("UTF-8").length));
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(MainGui.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_hideBtActionPerformed
+
+    private void inUnhideBrowserBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inUnhideBrowserBtActionPerformed
+        // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("PNG Image", "png");
+        chooser.setFileFilter(filter);
+        int returnVal = chooser.showOpenDialog(null);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            inputUnhide = chooser.getSelectedFile();
+            inUnhidePathLb.setText(inputUnhide.getAbsolutePath());
+        }
+
+    }//GEN-LAST:event_inUnhideBrowserBtActionPerformed
+
+    private void unhideBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unhideBtActionPerformed
+        // TODO add your handling code here:
+        String message;
+        if (inputUnhide == null || textLengtTf.getText().length() == 0) {
+            JOptionPane.showMessageDialog(null, "Hãy nhập đủ tham số đầu vào");
+        } else {
+            try {
+                int length = Integer.parseInt(textLengtTf.getText());
+                String s = inputTextTA.getText();
+                Matrix key = new Matrix(new int[][]{
+                    {1, 0, 0, 1},
+                    {1, 1, 0, 1},
+                    {0, 0, 0, 1},
+                    {0, 0, 1, 1},});
+                message = WuLee.readInformation(key, inputUnhide, length);
+                outputTA.setText(message);
+            } catch (NumberFormatException nfe) {
+                JOptionPane.showMessageDialog(null, "Độ dài mẩu tin phải là số nguyên");
+            } catch (IOException ex) {
+                Logger.getLogger(MainGui.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_unhideBtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -251,6 +359,7 @@ public class MainGui extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 try {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -261,22 +370,31 @@ public class MainGui extends javax.swing.JFrame {
             }
         });
     }
-    
     private File input;
     private File output;
+    private File inputUnhide;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton hideBt;
     private javax.swing.JPanel hidePane;
     private javax.swing.JButton inBrowseBt;
     private javax.swing.JLabel inPathLb;
+    private javax.swing.JButton inUnhideBrowserBt;
+    private javax.swing.JLabel inUnhidePathLb;
     private javax.swing.JTextArea inputTextTA;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton outBrowseBt;
     private javax.swing.JLabel outPathLb;
+    private javax.swing.JTextArea outputTA;
     private javax.swing.JTabbedPane tabPane;
+    private javax.swing.JTextField textLengtTf;
+    private javax.swing.JButton unhideBt;
     private javax.swing.JPanel unhidePane;
     // End of variables declaration//GEN-END:variables
 }

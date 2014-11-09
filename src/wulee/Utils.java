@@ -144,7 +144,7 @@ public class Utils {
 
     public static void copyFile(File input, File output) throws IOException {
         FileInputStream reader = new FileInputStream(input);
-        FileOutputStream writer = new FileOutputStream(output);
+        FileOutputStream writer = new FileOutputStream(output, Boolean.FALSE);
         int c;
         while ((c = reader.read()) != -1) {
             writer.write(c);
