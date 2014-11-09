@@ -7,9 +7,13 @@ package wulee;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import org.apache.commons.codec.binary.BinaryCodec;
+import org.apache.commons.codec.binary.StringUtils;
 
 /**
  *
@@ -29,7 +33,7 @@ public class WuLee {
         List<Matrix> list = imageMatrix.divide(key.getRows(), key.getColumns());
         int i=0;
         for (Matrix m:list){
-            if (i == s.length()) break;
+            if (i >= binaryString.length()) break;
             Matrix and = key.andMatrix(m);
             
             if (and.numOfBit1()>0 && and.numOfBit1()<key.numOfBit1()){
@@ -51,28 +55,43 @@ public class WuLee {
             }
         }
         Matrix merge = Matrix.merge(imageMatrix.getRows(), imageMatrix.getColumns(), list);
-        //System.out.println(imageMatrix.totalDiff(merge));
+        System.out.println(imageMatrix.totalDiff(merge));
         Utils.writeBinaryImage(merge, input);
         
     }
 
     public static void main(String[] args) {
-        String s = "Vu Long Hai";
-        System.out.println(Utils.convertStringToBinary(s).length());
-        Matrix key = new Matrix(new int[][]{
-            {1, 0, 0, 1},
-            {1, 0, 1, 1},
-            {0, 0, 0, 1},
-            {0, 1, 0, 1},
+
             
-        });
-        File original = new File("resource/binary.png");
-        File copy = new File ("resource/out.png");
+            
         try {
-            hideInformation(s, key, copy);
-        } catch (IOException ex) {
+            //        System.out.println(Utils.convertStringToBinary(s).length());
+//        Matrix key = new Matrix(new int[][]{
+//            {1, 0, 0, 1},
+//            {1, 0, 1, 1},
+//            {0, 0, 0, 1},
+//            {0, 1, 0, 1},
+//            
+//        });
+//        File original = new File("resource/binary.png");
+//        File copy = new File ("resource/out.png");
+//        try {
+//            hideInformation(s, key, copy);
+//        } catch (IOException ex) {
+//            Logger.getLogger(WuLee.class.getName()).log(Level.SEVERE, null, ex);
+            
+//        }
+            String s = "Vũ Long Hải";
+            String binary = Utils.convertStringToBinary(s);
+            String decode = Utils.convertBinaryToString(binary);
+            System.out.println(binary.length());
+            System.out.println(binary);
+            System.out.println(decode);
+        } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(WuLee.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
+        
 
     }
 }
