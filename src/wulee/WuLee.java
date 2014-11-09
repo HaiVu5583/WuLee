@@ -60,38 +60,38 @@ public class WuLee {
         
     }
 
-    public static void main(String[] args) {
-
-            
-            
-        try {
-            //        System.out.println(Utils.convertStringToBinary(s).length());
-//        Matrix key = new Matrix(new int[][]{
-//            {1, 0, 0, 1},
-//            {1, 0, 1, 1},
-//            {0, 0, 0, 1},
-//            {0, 1, 0, 1},
+//    public static void main(String[] args) {
+//
 //            
-//        });
-//        File original = new File("resource/binary.png");
-//        File copy = new File ("resource/out.png");
+//            
 //        try {
-//            hideInformation(s, key, copy);
-//        } catch (IOException ex) {
+//            //        System.out.println(Utils.convertStringToBinary(s).length());
+////        Matrix key = new Matrix(new int[][]{
+////            {1, 0, 0, 1},
+////            {1, 0, 1, 1},
+////            {0, 0, 0, 1},
+////            {0, 1, 0, 1},
+////            
+////        });
+////        File original = new File("resource/binary.png");
+////        File copy = new File ("resource/out.png");
+////        try {
+////            hideInformation(s, key, copy);
+////        } catch (IOException ex) {
+////            Logger.getLogger(WuLee.class.getName()).log(Level.SEVERE, null, ex);
+//            
+////        }
+//            String s = "Vũ Long Hải";
+//            String binary = Utils.convertStringToBinary(s);
+//            String decode = Utils.convertBinaryToString(binary);
+//            System.out.println(binary.length());
+//            System.out.println(binary);
+//            System.out.println(decode);
+//        } catch (UnsupportedEncodingException ex) {
 //            Logger.getLogger(WuLee.class.getName()).log(Level.SEVERE, null, ex);
-            
 //        }
-            String s = "Vũ Long Hải";
-            String binary = Utils.convertStringToBinary(s);
-            String decode = Utils.convertBinaryToString(binary);
-            System.out.println(binary.length());
-            System.out.println(binary);
-            System.out.println(decode);
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(WuLee.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
-        
-
-    }
+//       
+//        
+//
+//    }
 }
