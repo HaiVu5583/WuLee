@@ -8,11 +8,9 @@ package wulee;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import wulee.exception.MatrixInputException;
 
-/**
- *
- * @author Vu
- */
+// Class bieu dien ma tran nhi phan
 public class Matrix {
     private int[][] matrix;
     private int rows;
@@ -39,7 +37,7 @@ public class Matrix {
         int [][] b = this.getMatrix();
         int[][] result = new int[rows][columns];
         for (int i=0; i<rows; i++){
-            for (int j=0; j<rows; j++){
+            for (int j=0; j<columns; j++){
                 if (a[i][j]==b[i][j] && a[i][j]==1)
                     result[i][j] = 1;
                 else 
@@ -49,6 +47,7 @@ public class Matrix {
         Matrix resultMatrix = new Matrix(result);
         return resultMatrix;
     }
+    // Tinh tong so bit 1 trong ma tran
     public int numOfBit1(){
         int sum=0;
         for (int i=0; i<rows; i++){
@@ -68,6 +67,7 @@ public class Matrix {
         }
         return total;
     }
+    // Tin 
     public MyPair findMatch(Matrix m, MyPair p){
         List<MyPair> list = new ArrayList<>();
         for (int i=0; i<rows; i++){
@@ -80,6 +80,7 @@ public class Matrix {
         Collections.shuffle(list);
         return (list.get(0));
     }
+    // Lay ngau nhien toa do (i,j) trong ma tran thoa man gia tri tai (i, j) = gia tri dau vao  
     public MyPair getRandomByCondition (int in){
         List<MyPair> list = new ArrayList<>();
         for (int i=0; i<rows; i++){
@@ -92,6 +93,7 @@ public class Matrix {
         Collections.shuffle(list);
         return (list.get(0));
     }
+    // Chia ma tran thanh cac ma tran con dua vao kich thuoc ma tran con moi
     public ArrayList<Matrix> divide(int m, int n){
         int numOfSubMatrix = (rows/m) * (columns/n);
         int newRows = rows/m;
@@ -102,11 +104,6 @@ public class Matrix {
         for (int i=0; i<newRows; i++){
             for (int j=0; j<newColumns; j++){
                 int[][] temp = new int[m][n];
-//                for (int k=m*i; k<m*(i+1); k++){
-//                    for (int l=n*j; l<n*(j+1); l++){
-//                        temp[k][l] = matrix[k][l];
-//                    }
-//                }
                 for (int k=0; k<m; k++){
                     for (int l=0; l<n; l++){
                         temp[k][l] = matrix[m*i+k][n*j+l];
@@ -118,6 +115,20 @@ public class Matrix {
         }
         return list;
     }
+    // Doc ma tran tu chuoi nhi phan va so hang, so cot
+    public static Matrix readFromString (String s, int r, int c)throws MatrixInputException{
+        if (s.length()!= r*c) throw new MatrixInputException();
+        Matrix m = new Matrix(r, c);
+        for (int i=0; i<r;i++){
+            for (int j=0; j<c; j++){
+                int value = Integer.parseInt(Character.toString(s.charAt(i*c+j)));
+                if (value!= 0 && value!= 1) throw new MatrixInputException();
+                m.setValue(i, j, value);
+            }
+        }
+        return m;
+    }
+    // Ghep chuoi cac ma tran nho thanh ma tran lon
     public static Matrix merge(int originalRows, int originalColumns, List<Matrix> list){
         Matrix sample = list.get(0);
         
@@ -147,6 +158,7 @@ public class Matrix {
         if (matrix[i][j] == 0) matrix[i][j] = 1;
         else if (matrix[i][j] == 1) matrix[i][j] = 0;
     }
+    // Lay gia tri tai vi tri xac dinh cua ma tran
     public int getValue(int i, int j){
         return matrix[i][j];
     }

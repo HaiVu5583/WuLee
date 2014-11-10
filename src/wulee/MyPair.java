@@ -5,10 +5,6 @@
  */
 package wulee;
 
-/**
- *
- * @author Vu
- */
 public class MyPair {
     private int first; 
     private int second;

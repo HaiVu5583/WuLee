@@ -7,20 +7,16 @@ package wulee;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import wulee.exception.MatrixInputException;
+import wulee.exception.NotBinaryImageException;
 
-/**
- *
- * @author Vu
- */
 public class MainGui extends javax.swing.JFrame {
 
     /**
@@ -51,6 +47,13 @@ public class MainGui extends javax.swing.JFrame {
         outBrowseBt = new javax.swing.JButton();
         outPathLb = new javax.swing.JLabel();
         hideBt = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        numRowInTf = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        numColInTf = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        matrixStringInTf = new javax.swing.JTextField();
         unhidePane = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         inUnhideBrowserBt = new javax.swing.JButton();
@@ -61,6 +64,13 @@ public class MainGui extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         outputTA = new javax.swing.JTextArea();
         unhideBt = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        numRowOutTf = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        numColOutTf = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        matrixStringOutTf = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WuLee");
@@ -100,6 +110,22 @@ public class MainGui extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel5.setText("Nhập ma trận khóa");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel8.setText("Số hàng");
+
+        numRowInTf.setColumns(3);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setText("Số cột");
+
+        numColInTf.setColumns(3);
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel10.setText("Chuỗi biểu diễn ma trận");
+
         javax.swing.GroupLayout hidePaneLayout = new javax.swing.GroupLayout(hidePane);
         hidePane.setLayout(hidePaneLayout);
         hidePaneLayout.setHorizontalGroup(
@@ -107,22 +133,37 @@ public class MainGui extends javax.swing.JFrame {
             .addGroup(hidePaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(hidePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(hidePaneLayout.createSequentialGroup()
                         .addGroup(hidePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(outPathLb)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(inBrowseBt)
                             .addComponent(inPathLb)
                             .addComponent(jLabel4)
                             .addComponent(outBrowseBt)
-                            .addComponent(outPathLb))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(jLabel5)
+                            .addGroup(hidePaneLayout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addComponent(numRowInTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(171, 171, 171)
+                                .addComponent(jLabel9)
+                                .addGap(18, 18, 18)
+                                .addComponent(numColInTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(hidePaneLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(hidePaneLayout.createSequentialGroup()
+                        .addGroup(hidePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(matrixStringInTf, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
+                        .addGap(0, 20, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hidePaneLayout.createSequentialGroup()
-                .addContainerGap(175, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(hideBt)
-                .addGap(151, 151, 151))
+                .addGap(167, 167, 167))
         );
         hidePaneLayout.setVerticalGroup(
             hidePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,20 +173,32 @@ public class MainGui extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(hidePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(numRowInTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(numColInTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(matrixStringInTf, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inBrowseBt)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inPathLb)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(outBrowseBt)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(outPathLb)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(hideBt)
-                .addContainerGap())
+                .addGap(22, 22, 22))
         );
 
         tabPane.addTab("Giấu tin", hidePane);
@@ -180,6 +233,22 @@ public class MainGui extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel11.setText("Nhập ma trận khóa");
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel12.setText("Số hàng");
+
+        numRowOutTf.setColumns(3);
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel13.setText("Số cột");
+
+        numColOutTf.setColumns(3);
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel14.setText("Chuỗi biểu diễn ma trận");
+
         javax.swing.GroupLayout unhidePaneLayout = new javax.swing.GroupLayout(unhidePane);
         unhidePane.setLayout(unhidePaneLayout);
         unhidePaneLayout.setHorizontalGroup(
@@ -187,23 +256,40 @@ public class MainGui extends javax.swing.JFrame {
             .addGroup(unhidePaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(unhidePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
                     .addGroup(unhidePaneLayout.createSequentialGroup()
                         .addGroup(unhidePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(inUnhideBrowserBt)
-                            .addComponent(inUnhidePathLb)
-                            .addComponent(jLabel7)
+                            .addComponent(jScrollPane2)
+                            .addGroup(unhidePaneLayout.createSequentialGroup()
+                                .addGroup(unhidePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(inUnhideBrowserBt)
+                                    .addComponent(inUnhidePathLb)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel11))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(unhidePaneLayout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addGap(18, 18, 18)
+                        .addComponent(numRowOutTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(numColOutTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67))
+                    .addGroup(unhidePaneLayout.createSequentialGroup()
+                        .addGroup(unhidePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14)
+                            .addComponent(matrixStringOutTf, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(unhidePaneLayout.createSequentialGroup()
                                 .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(31, 31, 31)
                                 .addComponent(textLengtTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(unhidePaneLayout.createSequentialGroup()
-                .addGap(161, 161, 161)
+                        .addContainerGap(18, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, unhidePaneLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(unhideBt)
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addGap(169, 169, 169))
         );
         unhidePaneLayout.setVerticalGroup(
             unhidePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,8 +300,20 @@ public class MainGui extends javax.swing.JFrame {
                 .addComponent(inUnhideBrowserBt)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inUnhidePathLb)
-                .addGap(29, 29, 29)
+                .addGap(9, 9, 9)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(unhidePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(numRowOutTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13)
+                    .addComponent(numColOutTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(matrixStringOutTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(unhidePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(textLengtTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -224,7 +322,7 @@ public class MainGui extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(unhideBt)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         tabPane.addTab("Trích xuất tin", unhidePane);
@@ -233,7 +331,9 @@ public class MainGui extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabPane)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tabPane, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,7 +342,7 @@ public class MainGui extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    // Gán hành động Chọn ảnh phủ trong thẻ Giấu tin
     private void inBrowseBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inBrowseBtActionPerformed
         // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();        
@@ -254,7 +354,7 @@ public class MainGui extends javax.swing.JFrame {
             inPathLb.setText(input.getAbsolutePath());
         }
     }//GEN-LAST:event_inBrowseBtActionPerformed
-
+    // Gán hành động Chọn nơi lưu trữ Ảnh giấu tin trong thẻ giấu tin
     private void outBrowseBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outBrowseBtActionPerformed
         // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
@@ -266,33 +366,39 @@ public class MainGui extends javax.swing.JFrame {
             outPathLb.setText(output.getAbsolutePath());
         }
     }//GEN-LAST:event_outBrowseBtActionPerformed
-
+    // Gán hành động Giấu tin trong thẻ Giấu tin
     private void hideBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hideBtActionPerformed
         // TODO add your handling code here:
         String s;
-        if ((input == null) || (output == null) || (inputTextTA.getText().trim().length() == 0)) {
+        if ((input == null) || (output == null) || (inputTextTA.getText().trim().length() == 0) 
+               || numRowInTf.getText().trim().length()==0 || numColInTf.getText().trim().length()==0
+                || matrixStringInTf.getText().trim().length() ==0) {
             JOptionPane.showMessageDialog(null, "Hãy nhập đủ thông tin đầu vào");
         } else {
             s = inputTextTA.getText();
-            Matrix key = new Matrix(new int[][]{
-                {1, 0, 0, 1},
-                {1, 1, 0, 1},
-                {0, 0, 0, 1},
-                {0, 0, 1, 1},});
             try {
+                int rows = Integer.parseInt(numRowInTf.getText().trim());
+                int cols = Integer.parseInt(numColInTf.getText().trim());
+                String matrixString = matrixStringInTf.getText();
+                Matrix key = Matrix.readFromString(matrixString, rows, cols);
+                key.print();
                 Utils.copyFile(input, output);
-                WuLee.hideInformation(s, key, output);
+                if (WuLee.hideInformation(s, key, output)==true)
+                    JOptionPane.showMessageDialog(null, "Giấu tin thành công!\nĐộ dài mẩu tin : "+Integer.toString(s.trim().getBytes("UTF-8").length));
+                else
+                    JOptionPane.showMessageDialog(null, "Giấu tin không thành công!\n Kích thước ảnh phủ không đủ để giấu tin");
             } catch (IOException ex) {
                 Logger.getLogger(MainGui.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                JOptionPane.showMessageDialog(null, "Giấu tin thành công\nĐộ dài mẩu tin : "+Integer.toString(s.trim().getBytes("UTF-8").length));
-            } catch (UnsupportedEncodingException ex) {
-                Logger.getLogger(MainGui.class.getName()).log(Level.SEVERE, null, ex);
+            }catch (NumberFormatException nfe){
+                JOptionPane.showMessageDialog(null, "Số hàng và số cột phải là số nguyên");
+            } catch (MatrixInputException ex) {
+                JOptionPane.showMessageDialog(null, "Chuối biểu diễn ma trận phải có dạng nhị phân và chiều dài =  bằng số hàng x số cột");
+            } catch (NotBinaryImageException ex) {
+                JOptionPane.showMessageDialog(null, "Ảnh phủ phải là 1 file ảnh nhị phân");
             }
         }
     }//GEN-LAST:event_hideBtActionPerformed
-
+    // Gán hành động Chọn ảnh giấu tin trong thẻ Trích xuất tin
     private void inUnhideBrowserBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inUnhideBrowserBtActionPerformed
         // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
@@ -305,27 +411,31 @@ public class MainGui extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_inUnhideBrowserBtActionPerformed
-
+    // Gán hành động Trích tin trong thẻ Trích xuất tin
     private void unhideBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unhideBtActionPerformed
         // TODO add your handling code here:
         String message;
-        if (inputUnhide == null || textLengtTf.getText().length() == 0) {
+        if (inputUnhide == null || textLengtTf.getText().length() == 0 || numRowOutTf.getText().trim().length() ==0
+                || numColOutTf.getText().trim().length()==0 || matrixStringOutTf.getText().trim().length() ==0) {
             JOptionPane.showMessageDialog(null, "Hãy nhập đủ tham số đầu vào");
         } else {
             try {
                 int length = Integer.parseInt(textLengtTf.getText());
                 String s = inputTextTA.getText();
-                Matrix key = new Matrix(new int[][]{
-                    {1, 0, 0, 1},
-                    {1, 1, 0, 1},
-                    {0, 0, 0, 1},
-                    {0, 0, 1, 1},});
+                int rows = Integer.parseInt(numRowOutTf.getText().trim());
+                int cols = Integer.parseInt(numColOutTf.getText().trim());
+                String matrixString = matrixStringOutTf.getText().trim();
+                Matrix key = Matrix.readFromString(matrixString, rows, cols);
                 message = WuLee.readInformation(key, inputUnhide, length);
                 outputTA.setText(message);
             } catch (NumberFormatException nfe) {
-                JOptionPane.showMessageDialog(null, "Độ dài mẩu tin phải là số nguyên");
+                JOptionPane.showMessageDialog(null, "Độ dài mẩu tin, số hàng, số cột phải là số nguyên");
             } catch (IOException ex) {
                 Logger.getLogger(MainGui.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (MatrixInputException ex) {
+                JOptionPane.showMessageDialog(null, "Chuối biểu diễn ma trận phải có dạng nhị phân và chiều dài =  bằng số hàng x số cột");
+            } catch (NotBinaryImageException ex) {
+                JOptionPane.showMessageDialog(null, "Ảnh đã giấu tin phải là file ảnh nhị phân");
             }
         }
     }//GEN-LAST:event_unhideBtActionPerformed
@@ -382,13 +492,27 @@ public class MainGui extends javax.swing.JFrame {
     private javax.swing.JLabel inUnhidePathLb;
     private javax.swing.JTextArea inputTextTA;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField matrixStringInTf;
+    private javax.swing.JTextField matrixStringOutTf;
+    private javax.swing.JTextField numColInTf;
+    private javax.swing.JTextField numColOutTf;
+    private javax.swing.JTextField numRowInTf;
+    private javax.swing.JTextField numRowOutTf;
     private javax.swing.JButton outBrowseBt;
     private javax.swing.JLabel outPathLb;
     private javax.swing.JTextArea outputTA;

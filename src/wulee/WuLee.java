@@ -7,20 +7,9 @@ package wulee;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import org.apache.commons.codec.binary.BinaryCodec;
-import org.apache.commons.codec.binary.StringUtils;
+import wulee.exception.NotBinaryImageException;
 
-/**
- *
- * @author Vu
- */
 public class WuLee {
 
     /**
@@ -28,8 +17,10 @@ public class WuLee {
      * @param key
      * @param input
      * @throws java.io.IOException
+     * @throws wulee.exception.NotBinaryImageException
      */
-    public static void hideInformation(String s, Matrix key, File input) throws IOException {
+    // Giau tin vao anh voi dau vao la chuoi can giau, ma tran khoa, file anh nhi phan.
+    public static boolean hideInformation(String s, Matrix key, File input) throws IOException, NotBinaryImageException {
         String binaryString = Utils.convertStringToBinary(s);
         Matrix imageMatrix = Utils.getMatrixFromImage(input);
         List<Matrix> list = imageMatrix.divide(key.getRows(), key.getColumns());
@@ -58,14 +49,18 @@ public class WuLee {
                 System.out.println(i);
             }
         }
-        Matrix merge = Matrix.merge(imageMatrix.getRows(), imageMatrix.getColumns(), list);
-        //System.out.println(imageMatrix.totalDiff(merge));
-        Utils.writeBinaryImage(merge, input);
+        if (i==binaryString.length()){
+            Matrix merge = Matrix.merge(imageMatrix.getRows(), imageMatrix.getColumns(), list);
+            //System.out.println(imageMatrix.totalDiff(merge));
+            Utils.writeBinaryImage(merge, input);
+            return true;
+        }
+        return false;
 
     }
-
+    // Doc tin giau trong anh nhi phan voi dau vao la Ma tran khoa, File anh nhi phan, va chieu dai UTF8 cua mau tin
     public static String readInformation(Matrix key, File input, int length)
-            throws IOException {
+            throws IOException, NotBinaryImageException {
         Matrix imageMatrix = Utils.getMatrixFromImage(input);
         List<Matrix> list = imageMatrix.divide(key.getRows(), key.getColumns());
         StringBuilder bitinfo = new StringBuilder("");
@@ -96,33 +91,4 @@ public class WuLee {
         String info = Utils.convertBinaryToString(bitinfo.toString());
         return info;
     }
-//    public static void main(String[] args) {
-//        try {
-//            File input = new File("resource/binary.png");
-//            File output = new File("resource/out.png");
-//            String s = "Hôm nay chích hít tại 3G3";
-//            Matrix key = new Matrix(new int[][]{
-//                {1, 0, 0, 0},
-//                {1, 0, 1, 0},
-//                {1, 1, 0, 1},
-//                {0, 0, 0, 0}
-//            });
-//            Utils.copyFile(input, output);
-//            hideInformation(s, key, output);
-//            System.out.println("Output: "+readInformation(key, output, s.getBytes("UTF-8").length));
-//        } catch (IOException ex) {
-//            Logger.getLogger(WuLee.class.getName()).log(Level.SEVERE, null, ex);
-////        }
-//        JFileChooser chooser = new JFileChooser();
-//    FileNameExtensionFilter filter = new FileNameExtensionFilter(
-//        "JPG & GIF Images", "jpg", "gif");
-//    chooser.setFileFilter(filter);
-//    int returnVal = chooser.showOpenDialog(null);
-//    if(returnVal == JFileChooser.APPROVE_OPTION) {
-//       System.out.println("You chose to open this file: " +
-//            chooser.getSelectedFile().getName());
-//    }
-////        
-//    }
 }
-//a = readInformation(key, source, s.getBytes("UTF-8").length);
