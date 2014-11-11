@@ -7,7 +7,11 @@ package wulee;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import wulee.exception.NotBinaryImageException;
 
 public class WuLee {
@@ -16,11 +20,14 @@ public class WuLee {
      * @param s
      * @param key
      * @param input
+     * @return 
      * @throws java.io.IOException
      * @throws wulee.exception.NotBinaryImageException
+     * @throws java.io.UnsupportedEncodingException
+     * @throws java.lang.ClassNotFoundException
      */
     // Giau tin vao anh voi dau vao la chuoi can giau, ma tran khoa, file anh nhi phan.
-    public static boolean hideInformation(String s, Matrix key, File input) throws IOException, NotBinaryImageException {
+    public static boolean hideInformation(String s, Matrix key, File input) throws IOException, NotBinaryImageException, UnsupportedEncodingException, ClassNotFoundException {
         String binaryString = Utils.convertStringToBinary(s);
         Matrix imageMatrix = Utils.getMatrixFromImage(input);
         List<Matrix> list = imageMatrix.divide(key.getRows(), key.getColumns());
@@ -46,7 +53,7 @@ public class WuLee {
                     }
                 }
                 i++;
-                System.out.println(i);
+                //System.out.println(i);
             }
         }
         if (i==binaryString.length()){
@@ -60,7 +67,7 @@ public class WuLee {
     }
     // Doc tin giau trong anh nhi phan voi dau vao la Ma tran khoa, File anh nhi phan, va chieu dai UTF8 cua mau tin
     public static String readInformation(Matrix key, File input, int length)
-            throws IOException, NotBinaryImageException {
+            throws IOException, NotBinaryImageException, UnsupportedEncodingException, ClassNotFoundException {
         Matrix imageMatrix = Utils.getMatrixFromImage(input);
         List<Matrix> list = imageMatrix.divide(key.getRows(), key.getColumns());
         StringBuilder bitinfo = new StringBuilder("");
@@ -91,4 +98,5 @@ public class WuLee {
         String info = Utils.convertBinaryToString(bitinfo.toString());
         return info;
     }
+  
 }

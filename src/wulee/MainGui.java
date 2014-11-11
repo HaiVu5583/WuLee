@@ -383,10 +383,12 @@ public class MainGui extends javax.swing.JFrame {
                 Matrix key = Matrix.readFromString(matrixString, rows, cols);
                 key.print();
                 Utils.copyFile(input, output);
-                if (WuLee.hideInformation(s, key, output)==true)
+                if (WuLee.hideInformation(s, key, output)==true){
                     JOptionPane.showMessageDialog(null, "Giấu tin thành công!\nĐộ dài mẩu tin : "+Integer.toString(s.trim().getBytes("UTF-8").length));
-                else
+                }else{
+                    output.delete();
                     JOptionPane.showMessageDialog(null, "Giấu tin không thành công!\n Kích thước ảnh phủ không đủ để giấu tin");
+                }
             } catch (IOException ex) {
                 Logger.getLogger(MainGui.class.getName()).log(Level.SEVERE, null, ex);
             }catch (NumberFormatException nfe){
@@ -395,6 +397,9 @@ public class MainGui extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Chuối biểu diễn ma trận phải có dạng nhị phân và chiều dài =  bằng số hàng x số cột");
             } catch (NotBinaryImageException ex) {
                 JOptionPane.showMessageDialog(null, "Ảnh phủ phải là 1 file ảnh nhị phân");
+            } catch (ClassNotFoundException ex) {
+                output.delete();
+                JOptionPane.showMessageDialog(null, "Yêu cầu thư viện commons-codec-1.9.jar");
             }
         }
     }//GEN-LAST:event_hideBtActionPerformed
@@ -436,6 +441,8 @@ public class MainGui extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Chuối biểu diễn ma trận phải có dạng nhị phân và chiều dài =  bằng số hàng x số cột");
             } catch (NotBinaryImageException ex) {
                 JOptionPane.showMessageDialog(null, "Ảnh đã giấu tin phải là file ảnh nhị phân");
+            } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "Yêu cầu thư viện commons-codec-1.9.jar");
             }
         }
     }//GEN-LAST:event_unhideBtActionPerformed
