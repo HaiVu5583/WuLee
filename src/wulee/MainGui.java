@@ -397,6 +397,7 @@ public class MainGui extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Chuối biểu diễn ma trận phải có dạng nhị phân và chiều dài =  bằng số hàng x số cột");
             } catch (NotBinaryImageException ex) {
                 JOptionPane.showMessageDialog(null, "Ảnh phủ phải là 1 file ảnh nhị phân");
+                output.delete();
             } catch (ClassNotFoundException ex) {
                 output.delete();
                 JOptionPane.showMessageDialog(null, "Yêu cầu thư viện commons-codec-1.9.jar");

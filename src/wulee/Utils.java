@@ -66,10 +66,15 @@ public class Utils {
     }
 
     // Ghi de du lieu anh bang du lieu ma tran
-    public static void writeBinaryImage(Matrix m, File input) throws IOException {
+    public static void writeBinaryImage(Matrix m, File input) throws IOException, NotBinaryImageException {      
+        BufferedImage buff = null;
+        if (ImageIO.read(input) == null) {
+            throw new NotBinaryImageException();
+        } else {
+            buff = ImageIO.read(input);
+        }
         int width = m.getColumns();
         int height = m.getRows();
-        BufferedImage buff = ImageIO.read(input);
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 if (m.getValue(j, i) == 0) {
